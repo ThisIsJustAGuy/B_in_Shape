@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">B_In_Shape</string>
+    <string name="slogan">Let\'s B in Shape!</string>
+
+    <string name="bodypart_text">Select a bodypart</string>
+    <string name="bodypart_btn1">Lower Body</string>
+    <string name="bodypart_btn2">Upper Body</string>
+    <string name="bodypart_btn3">Cardio</string>
+
+    <string name="time_text">Select training length</string>
+    <string name="time_btn1">60 minutes</string>
+    <string name="time_btn2">45 minutes</string>
+    <string name="time_btn3">30 minutes</string>
+</resources>

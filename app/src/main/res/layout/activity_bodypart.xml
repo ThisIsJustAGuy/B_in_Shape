@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@color/brown_background">
+
+    <ImageButton
+        android:id="@+id/Bodypart_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:src="@drawable/arrow_back_50"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"/>
+
+    <TextView
+        android:id="@+id/Bodypart_tw"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/bodypart_text"
+        android:textAlignment="center"
+        android:textAppearance="@android:style/TextAppearance.Material.Display1"
+        android:textColor="@color/white"
+        android:textFontWeight="800"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="100dp"/>
+
+    <Button
+        android:id="@+id/Bodypart_btn1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/bodypart_btn1"
+        android:textAllCaps="false"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Bodypart_tw"
+        android:background="@drawable/yellow_btn_background"
+        android:layout_marginHorizontal="30dp"
+        android:layout_marginTop="80dp" />
+
+    <Button
+        android:id="@+id/Bodypart_btn2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/bodypart_btn2"
+        android:textAllCaps="false"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Bodypart_btn1"
+        android:background="@drawable/yellow_btn_background"
+        android:layout_marginHorizontal="30dp"
+        android:layout_marginTop="25dp"/>
+
+    <Button
+        android:id="@+id/Bodypart_btn3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/bodypart_btn3"
+        android:textAllCaps="false"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Bodypart_btn2"
+        android:background="@drawable/yellow_btn_background"
+        android:layout_marginHorizontal="30dp"
+        android:layout_marginTop="25dp"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
