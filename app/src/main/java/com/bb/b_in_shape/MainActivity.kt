@@ -10,10 +10,10 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        var training_btn = findViewById<ImageButton>(R.id.training_btn)
+        val training_btn = findViewById<ImageButton>(R.id.training_btn)
         training_btn.setOnClickListener { _ -> navigateToTraining() }
 
-        var qr_btn = findViewById<ImageButton>(R.id.qr_btn)
+        val qr_btn = findViewById<ImageButton>(R.id.qr_btn)
         qr_btn.setOnClickListener { _ -> navigateToQR() }
     }
 
