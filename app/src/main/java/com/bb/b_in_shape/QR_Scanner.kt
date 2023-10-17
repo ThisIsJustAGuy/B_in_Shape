@@ -36,7 +36,7 @@ class QR_Scanner : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.qr_scanner)
 
         cameraExecutor = Executors.newSingleThreadExecutor()
 
