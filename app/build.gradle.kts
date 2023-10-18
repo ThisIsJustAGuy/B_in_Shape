@@ -9,8 +9,8 @@ android {
 
     defaultConfig {
         applicationId = "com.bb.b_in_shape"
-        minSdk = 26
-        targetSdk = 33
+        minSdk = 21
+        targetSdk = 28
         versionCode = 1
         versionName = "1.0"
 
