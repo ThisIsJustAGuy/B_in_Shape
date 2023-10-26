@@ -17,7 +17,8 @@
         android:background="@android:color/transparent"
         android:src="@drawable/arrow_back_50"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:importantForAccessibility="no" />
 
     <TextView
         android:id="@+id/Status_tw"
