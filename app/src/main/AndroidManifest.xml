@@ -30,6 +30,10 @@
             android:name=".BodypartActivity"
             android:exported="false"
             android:theme="@style/Theme.B_In_Shape"/>
+        <activity
+            android:name=".ExerciseActivity"
+            android:exported="false"
+            android:theme="@style/Theme.B_In_Shape"/>
     </application>
 
 </manifest>
