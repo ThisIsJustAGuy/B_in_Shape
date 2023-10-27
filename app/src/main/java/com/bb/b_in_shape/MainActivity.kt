@@ -12,10 +12,19 @@ class MainActivity : ComponentActivity() {
 
         var training_btn = findViewById<ImageButton>(R.id.training_btn)
         training_btn.setOnClickListener { _ -> navigateToTraining() }
+
+        var qr_btn = findViewById<ImageButton>(R.id.qr_btn)
+        qr_btn.setOnClickListener { _ -> navigateToQR() }
     }
 
     fun navigateToTraining() {
         val intent = Intent(this, BodypartActivity::class.java)
+
+        startActivity(intent)
+    }
+
+    fun navigateToQR() {
+        val intent = Intent(this, QR_scanner::class.java)
 
         startActivity(intent)
     }
