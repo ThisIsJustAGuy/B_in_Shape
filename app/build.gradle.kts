@@ -73,13 +73,6 @@ dependencies {
     // ZXing for QR
     implementation("com.google.zxing:core:3.4.1")
 
-    // Testing
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.0")
-    androidTestImplementation("androidx.compose.ui:ui:1.5.2")
-    debugImplementation("androidx.compose.ui:ui-test:1.5.2")
-
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
     implementation("androidx.activity:activity-compose:1.8.0")
