@@ -20,7 +20,18 @@
         app:layout_constraintTop_toTopOf="parent"
         android:importantForAccessibility="no" />
 
-
+    <TextView
+        android:id="@+id/Status_tw"
+        android:layout_width="wrap_content"
+        android:layout_height="36dp"
+        android:layout_marginTop="40dp"
+        android:text="Will get replaced"
+        android:textAppearance="@android:style/TextAppearance.Material.Display1"
+        android:textColor="@color/white"
+        android:textSize="22sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

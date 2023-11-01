@@ -14,6 +14,7 @@ class TimeActivity : ComponentActivity() {
 
         val intent = intent
         val bodypart = intent.getStringExtra("bodypart")
+        val bdp : String = bodypart.toString()
 
         var statusText = findViewById<TextView>(R.id.Status_tw)
         statusText.text = bodypart
@@ -22,7 +23,7 @@ class TimeActivity : ComponentActivity() {
         back_btn.setOnClickListener { _ -> navigateBack() }
 
         var time_btn1 = findViewById<Button>(R.id.Time_btn1)
-        time_btn1.setOnClickListener { _ -> navigateForward(time_btn1) }
+        time_btn1.setOnClickListener { _ -> navigateForward(time_btn1, bdp) }
     }
 
     private fun navigateBack() {
@@ -31,9 +32,10 @@ class TimeActivity : ComponentActivity() {
         startActivity(intent)
     }
 
-    private fun navigateForward(time_btn1: Button) {
+    private fun navigateForward(time_btn1: Button, bodypart: String) {
         val intent = Intent(this, ExerciseActivity::class.java)
         intent.putExtra("time", time_btn1.text.toString())
+        intent.putExtra("bodypart", bodypart)
         startActivity(intent)
     }
 }
