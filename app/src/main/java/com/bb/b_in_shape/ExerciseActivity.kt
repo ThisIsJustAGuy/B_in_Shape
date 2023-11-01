@@ -8,9 +8,16 @@ import android.widget.ImageButton
 import android.widget.TextView
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import android.content.SharedPreferences
+import android.widget.CheckBox
+import android.widget.Toast
+import android.view.View
 
 
 class ExerciseActivity : ComponentActivity() {
+
+    private lateinit var sharedPreferences: SharedPreferences
+    private val PREFS_NAME = "MyPrefs"
 
      @SuppressLint("MissingInflatedId")
      override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,6 +45,9 @@ class ExerciseActivity : ComponentActivity() {
                 intent.putExtra("exercise", "HELP1")
                 startActivity(intent)
             }
+
+
+
         }
 
     }
