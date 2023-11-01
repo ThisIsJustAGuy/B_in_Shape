@@ -41,7 +41,7 @@
         android:layout_marginTop="184dp"
         android:background="@android:color/transparent"
         android:importantForAccessibility="no"
-        android:src="@drawable/sports_gymnastics_50"
+        android:src="@drawable/question_mark"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
