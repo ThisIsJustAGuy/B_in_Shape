@@ -8,9 +8,16 @@ import android.widget.ImageButton
 import android.widget.TextView
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import android.content.SharedPreferences
+import android.widget.CheckBox
+import android.view.View
+import android.widget.Toast
 
 
 class ExerciseActivity : ComponentActivity() {
+
+    private lateinit var sharedPreferences: SharedPreferences
+    private val PREFS_NAME = "MyPrefs"
 
      @SuppressLint("MissingInflatedId")
      override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,6 +45,43 @@ class ExerciseActivity : ComponentActivity() {
                 intent.putExtra("exercise", "HELP1")
                 startActivity(intent)
             }
+
+            sharedPreferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
+
+            val chk = findViewById<CheckBox>(R.id.checkBox)
+            val chk2 = findViewById<CheckBox>(R.id.checkBox2)
+            val chk3 = findViewById<CheckBox>(R.id.checkBox3)
+            val chk4 = findViewById<CheckBox>(R.id.checkBox4)
+
+            chk.isChecked = sharedPreferences.getBoolean("chk1_state", false)
+            chk2.isChecked = sharedPreferences.getBoolean("chk2_state", false)
+            chk3.isChecked = sharedPreferences.getBoolean("chk3_state", false)
+            chk4.isChecked = sharedPreferences.getBoolean("chk4_state", false)
+
+            chk.setOnCheckedChangeListener { _, isChecked ->
+                val editor = sharedPreferences.edit()
+                editor.putBoolean("chk1_state", isChecked)
+                editor.apply()
+            }
+
+            chk2.setOnCheckedChangeListener { _, isChecked ->
+                val editor = sharedPreferences.edit()
+                editor.putBoolean("chk2_state", isChecked)
+                editor.apply()
+            }
+
+            chk3.setOnCheckedChangeListener { _, isChecked ->
+                val editor = sharedPreferences.edit()
+                editor.putBoolean("chk3_state", isChecked)
+                editor.apply()
+            }
+
+            chk4.setOnCheckedChangeListener { _, isChecked ->
+                val editor = sharedPreferences.edit()
+                editor.putBoolean("chk4_state", isChecked)
+                editor.apply()
+            }
+
         }
 
     }
