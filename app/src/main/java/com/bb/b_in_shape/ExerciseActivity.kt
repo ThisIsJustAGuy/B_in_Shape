@@ -38,10 +38,6 @@ class ExerciseActivity : ComponentActivity() {
                 intent.putExtra("exercise", "HELP1")
                 startActivity(intent)
             }
-
-
-
-
         }
 
     }

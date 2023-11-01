@@ -8,6 +8,20 @@
     android:orientation="vertical"
     tools:context=".ExerciseActivity">
 
+    <CheckBox
+        android:id="@+id/checkBox"
+        android:layout_width="160dp"
+        android:layout_height="34dp"
+        android:layout_marginTop="68dp"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/yellow_btn_background"
+        android:text="1. szett"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toStartOf="@+id/help_btn1"
+        app:layout_constraintHorizontal_bias="0.811"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Status_tw" />
+
     <ImageButton
         android:id="@+id/Exercise_back"
         android:layout_width="wrap_content"
@@ -37,12 +51,57 @@
         android:id="@+id/help_btn1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="180dp"
-        android:layout_marginTop="184dp"
+        android:layout_marginStart="324dp"
+        android:layout_marginTop="136dp"
         android:background="@android:color/transparent"
         android:importantForAccessibility="no"
         android:src="@drawable/sports_gymnastics_50"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <CheckBox
+        android:id="@+id/checkBox2"
+        android:layout_width="160dp"
+        android:layout_height="34dp"
+        android:layout_marginStart="159dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="158dp"
+        android:background="@drawable/yellow_btn_background"
+        android:text="2. szett"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.53"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/checkBox" />
+
+    <CheckBox
+        android:id="@+id/checkBox3"
+        android:layout_width="160dp"
+        android:layout_height="34dp"
+        android:layout_marginStart="159dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="158dp"
+        android:background="@drawable/yellow_btn_background"
+        android:text="3. szett"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.53"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/checkBox2" />
+
+    <CheckBox
+        android:id="@+id/checkBox4"
+        android:layout_width="160dp"
+        android:layout_height="34dp"
+        android:layout_marginStart="159dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="158dp"
+        android:background="@drawable/yellow_btn_background"
+        android:text="4. szett"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.53"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/checkBox3" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
