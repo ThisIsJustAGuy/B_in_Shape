@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/brown_background"
     android:orientation="vertical"
-    tools:context=".ExerciseActivity">
+    tools:context=".VideoActivity">
 
     <ImageButton
         android:id="@+id/Exercise_back"
@@ -33,16 +33,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageButton
-        android:id="@+id/help_btn1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="180dp"
-        android:layout_marginTop="184dp"
-        android:background="@android:color/transparent"
-        android:importantForAccessibility="no"
-        android:src="@drawable/sports_gymnastics_50"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+
+    <WebView
+        android:id="@+id/web_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Status_tw"
+        tools:layout_editor_absoluteX="0dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

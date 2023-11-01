@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 
+
 class ExerciseActivity : ComponentActivity() {
 
      @SuppressLint("MissingInflatedId")
@@ -18,6 +19,7 @@ class ExerciseActivity : ComponentActivity() {
             setContentView(R.layout.activity_exercise)
 
             val bdp : String = intent.getStringExtra("bodypart").toString()
+            val time : String = intent.getStringExtra("time").toString()
             var back_btn = findViewById<ImageButton>(R.id.Exercise_back)
             back_btn.setOnClickListener { _ -> navigateBack(bdp) }
 
@@ -26,6 +28,18 @@ class ExerciseActivity : ComponentActivity() {
 
             val statusText = findViewById<TextView>(R.id.Status_tw)
             statusText.text = stat
+
+            val button = findViewById<ImageButton>(R.id.help_btn1)
+            button.setOnClickListener {
+                val intent = Intent(this, VideoActivity::class.java)
+                intent.putExtra("url", "dQw4w9WgXcQ")
+                intent.putExtra("bodypart", bdp)
+                intent.putExtra("time", time)
+                intent.putExtra("exercise", "HELP1")
+                startActivity(intent)
+            }
+
+
 
 
         }

@@ -41,6 +41,10 @@
             android:name=".QR_scanner"
             android:exported="false"
             android:theme="@style/Theme.B_In_Shape"/>
+        <activity
+            android:name=".VideoActivity"
+            android:exported="false"
+            android:theme="@style/Theme.B_In_Shape"/>
     </application>
 
 </manifest>
