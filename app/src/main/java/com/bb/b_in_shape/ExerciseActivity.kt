@@ -39,7 +39,7 @@ class ExerciseActivity : ComponentActivity() {
             val button = findViewById<ImageButton>(R.id.help_btn1)
             button.setOnClickListener {
                 val intent = Intent(this, VideoActivity::class.java)
-                intent.putExtra("url", "dQw4w9WgXcQ")
+                intent.putExtra("url", "ci2rx_uHnqw")
                 intent.putExtra("bodypart", bdp)
                 intent.putExtra("time", time)
                 intent.putExtra("exercise", "HELP1")

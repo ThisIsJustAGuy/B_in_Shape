@@ -1,5 +1,9 @@
 package com.bb.b_in_shape
 
+import android.view.ViewGroup
+import android.webkit.WebChromeClient
+import android.view.LayoutInflater
+import android.view.View
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
@@ -10,26 +14,35 @@ import android.widget.ImageButton
 import android.widget.TextView
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import android.webkit.WebSettings
+
+
+
 
 
 class VideoActivity: ComponentActivity() {
-    @SuppressLint("MissingInflatedId")
+    @SuppressLint("MissingInflatedId", "SetJavaScriptEnabled")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             setContentView(R.layout.video_player)
 
+
             val intent= intent
             val url = intent.getStringExtra("url").toString()
             val webView: WebView = findViewById(R.id.web_view)
-            webView.webViewClient = WebViewClient()
             webView.settings.javaScriptEnabled = true
+            webView.settings.loadWithOverviewMode = true
+            webView.settings.useWideViewPort = true
+            webView.settings.builtInZoomControls = true
+            webView.webChromeClient = WebChromeClient()
+            webView.webViewClient = WebViewClient()
 
             webView.loadData(stringMaker(url), "text/html", "utf-8")
 
             val bdp : String = intent.getStringExtra("bodypart").toString()
             val time : String = intent.getStringExtra("time").toString()
-            var back_btn = findViewById<ImageButton>(R.id.Exercise_back)
+            val back_btn = findViewById<ImageButton>(R.id.Exercise_back)
             back_btn.setOnClickListener { _ -> navigateBack(bdp, time) }
 
             val stat = intent.getStringExtra("exercise").toString()
@@ -45,8 +58,8 @@ class VideoActivity: ComponentActivity() {
 
         startActivity(intent)
     }
-    private fun stringMaker(url: String): String {
-        return  "<html><body><!-- 1. The <iframe> (and video player) will replace this <div> tag. -->\n" +
+    fun stringMaker (url: String): String{
+        val ert: String="<html><body><!-- 1. The <iframe> (and video player) will replace this <div> tag. -->\n" +
                 "    <div id=\"player\"></div>\n" +
                 "\n" +
                 "    <script>\n" +
@@ -94,5 +107,6 @@ class VideoActivity: ComponentActivity() {
                 "        player.stopVideo();\n" +
                 "      }\n" +
                 "    </script></body></html>"
+        return ert
     }
 }
