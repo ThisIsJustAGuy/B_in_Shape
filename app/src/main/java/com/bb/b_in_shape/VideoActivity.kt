@@ -48,6 +48,9 @@ class VideoActivity: ComponentActivity() {
             val stat = intent.getStringExtra("exercise").toString()
             val statusText = findViewById<TextView>(R.id.Status_tw)
             statusText.text = stat
+
+            val description =findViewById<TextView>(R.id.description)
+            description.text = intent.getStringExtra("description").toString()
         }
     }
 

@@ -69,10 +69,11 @@ class ExerciseActivity : ComponentActivity() {
         val exercise_help = findViewById<ImageButton>(R.id.exercise_help_btn)
         exercise_help.setOnClickListener {
             val intent = Intent(this, VideoActivity::class.java)
-            intent.putExtra("url", "dQw4w9WgXcQ")
+            intent.putExtra("url", "jPne7KxVNqo")
             intent.putExtra("bodypart", bdp)
             intent.putExtra("time", time)
-            intent.putExtra("exercise", "Exercise help")
+            intent.putExtra("exercise", "Segítség a guggoláshoz")
+            intent.putExtra("description", getString(R.string.guggolas))
             startActivity(intent)
         }
 
