@@ -2,16 +2,23 @@ package com.bb.b_in_shape
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.content.SharedPreferences
+import android.graphics.Typeface
 import android.os.Bundle
+import android.util.Log
+import android.util.TypedValue
+import android.view.Gravity
+import android.view.View
 import android.widget.Button
+import android.widget.CheckBox
 import android.widget.ImageButton
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import android.content.SharedPreferences
-import android.widget.CheckBox
-import android.widget.Toast
-import android.view.Gravity
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.constraintlayout.widget.ConstraintSet
+import androidx.core.content.ContextCompat
 
 
 class ExerciseActivity : ComponentActivity() {
@@ -25,6 +32,7 @@ class ExerciseActivity : ComponentActivity() {
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
+        //TODO: itt lekérjük az exercise-okat, és át kell majd passzolni a TextView készítésnek, és a help gombnak
         super.onCreate(savedInstanceState)
         setContent {
             setContentView(R.layout.activity_exercise)
@@ -40,18 +48,19 @@ class ExerciseActivity : ComponentActivity() {
             done_bnt = findViewById<Button>(R.id.done_btn)
             done_bnt.isEnabled = false
             done_bnt.setOnClickListener {
-                val toast = Toast.makeText(this, "Well Done!", Toast.LENGTH_SHORT)
+                val toast = Toast.makeText(this, "Szép munka!", Toast.LENGTH_SHORT)
                 toast.setGravity(Gravity.TOP or Gravity.CENTER, 0, 0)
                 toast.show()
                 resetCheckboxes()
                 navigateHome()
             }
 
+            sharedPreferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
+
             //Help buttons
             helpSetup()
 
             //Checkboxes
-            sharedPreferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
             checkboxSetup()
 
 
@@ -60,104 +69,184 @@ class ExerciseActivity : ComponentActivity() {
     }
 
     private fun setStatus() {
-        val statText = "${bdp} > ${time}"
+        val statText = "$bdp > $time"
         val statusText = findViewById<TextView>(R.id.Status_tw)
         statusText.text = statText
     }
 
-    private fun helpSetup() {
-        val exercise_help = findViewById<ImageButton>(R.id.exercise_help_btn)
-        exercise_help.setOnClickListener {
-            val intent = Intent(this, VideoActivity::class.java)
-            intent.putExtra("url", "dQw4w9WgXcQ")
-            intent.putExtra("bodypart", bdp)
-            intent.putExtra("time", time)
-            intent.putExtra("exercise", "Exercise help")
-            startActivity(intent)
+    private fun exerciseCheckboxSetup(amount: Int) {
+        val parentLayout = findViewById<ConstraintLayout>(R.id.exercise_group)
+        var prevId = View.NO_ID
+        val constraintSet = ConstraintSet() // Create a single ConstraintSet
+        constraintSet.clone(parentLayout) // Clone the initial state
+
+        for (i in 1..amount) {
+            var cb = CheckBox(this)
+            parentLayout.addView(cb)
+            val exerciseName = "run"
+            val exercise = resources.getString(resources.getIdentifier(exerciseName, "string", applicationContext.packageName))
+            cb.id = View.generateViewId()
+            cb.text = "$exercise"
+
+
+            constraintSet.connect(
+                cb.id,
+                ConstraintSet.START,
+                ConstraintSet.PARENT_ID,
+                ConstraintSet.START
+            )
+            constraintSet.connect(
+                cb.id,
+                ConstraintSet.END,
+                ConstraintSet.PARENT_ID,
+                ConstraintSet.END
+            )
+            if (prevId == View.NO_ID) {
+                constraintSet.connect(
+                    cb.id,
+                    ConstraintSet.TOP,
+                    R.id.exercise_tw,
+                    ConstraintSet.BOTTOM
+                )
+            } else {
+                constraintSet.connect(cb.id, ConstraintSet.TOP, prevId, ConstraintSet.BOTTOM)
+            }
+
+            constraintSet.setMargin(cb.id, ConstraintSet.TOP, dpToPx(15f))
+            constraintSet.setMargin(cb.id, ConstraintSet.START, dpToPx(30f))
+            constraintSet.setMargin(cb.id, ConstraintSet.END, dpToPx(60f))
+            if (i == amount) {
+                constraintSet.setMargin(cb.id, ConstraintSet.BOTTOM, dpToPx(30f))
+                constraintSet.connect(cb.id, ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM)
+            }
+
+            constraintSet.constrainWidth(cb.id, ConstraintSet.MATCH_CONSTRAINT)
+            constraintSet.constrainHeight(cb.id, dpToPx(50f))
+
+            cb.setPaddingRelative(dpToPx(10f), 0, 0, 0)
+            cb.setBackgroundResource(R.drawable.yellow_btn_background)
+            cb.textSize = dpToSp(20f)
+            prevId = cb.id
+
+            checkboxes.add(cb)
+            cb.isChecked = sharedPreferences.getBoolean("ex_cb_$i-state", false)
+            cb.setOnCheckedChangeListener { _, isChecked ->
+                checkboxListenerFn(isChecked, "ex_cb_$i-state")
+            }
+
+            generateHelp(cb, constraintSet)
+
+            Log.d(
+                "Exercise checkbox $i",
+                "Width: ${cb.width}, Height: ${cb.height}, Top: ${cb.top}, Bottom: ${cb.bottom}"
+            )
         }
 
-        val warmup_help_1 = findViewById<ImageButton>(R.id.warmup1_help_btn)
-        warmup_help_1.setOnClickListener {
-            val intent = Intent(this, VideoActivity::class.java)
-            intent.putExtra("url", "dQw4w9WgXcQ")
-            intent.putExtra("bodypart", bdp)
-            intent.putExtra("time", time)
-            intent.putExtra("exercise", "Warmup help")
-            startActivity(intent)
-        }
-
-        val warmup_help_2 = findViewById<ImageButton>(R.id.warmup2_help_btn)
-        warmup_help_2.setOnClickListener {
-            val intent = Intent(this, VideoActivity::class.java)
-            intent.putExtra("url", "dQw4w9WgXcQ")
-            intent.putExtra("bodypart", bdp)
-            intent.putExtra("time", time)
-            intent.putExtra("exercise", "Warmup help")
-            startActivity(intent)
-        }
+        constraintSet.applyTo(parentLayout)
     }
 
-    private fun checkboxSetup(){
-        val ex_chk1 = findViewById<CheckBox>(R.id.set1_cb)
-        checkboxes.add(ex_chk1)
-        val ex_chk2 = findViewById<CheckBox>(R.id.set2_cb)
-        checkboxes.add(ex_chk2)
-        val ex_chk3 = findViewById<CheckBox>(R.id.set3_cb)
-        checkboxes.add(ex_chk3)
-        val ex_chk4 = findViewById<CheckBox>(R.id.set4_cb)
-        checkboxes.add(ex_chk4)
+    private fun generateHelp(checkbox: CheckBox, constraintSet: ConstraintSet): Int {
+        /*val exercise_help = findViewById<ImageButton>(R.id.exercise_help_btn)
+exercise_help.setOnClickListener {
+    val intent = Intent(this, VideoActivity::class.java)
+    intent.putExtra("url", "dQw4w9WgXcQ")
+    intent.putExtra("bodypart", bdp)
+    intent.putExtra("time", time)
+    intent.putExtra("exercise", "Edzési segítség")
+    startActivity(intent)
+}*/
 
-        val wm_chk1 = findViewById<CheckBox>(R.id.warmup1_cb)
-        checkboxes.add(wm_chk1)
-        val wm_chk2 = findViewById<CheckBox>(R.id.warmup2_cb)
-        checkboxes.add(wm_chk2)
+        /*<ImageButton
+                app:layout_constraintStart_toEndOf="@+id/warmup_tw"
+                app:layout_constraintTop_toTopOf="parent" />*/
+        val parentLayout = findViewById<ConstraintLayout>(R.id.exercise_group)
+        val helpButton = ImageButton(this)
+        parentLayout.addView(helpButton)
+        helpButton.id = View.generateViewId()
+        constraintSet.constrainWidth(helpButton.id, ConstraintSet.WRAP_CONTENT)
+        constraintSet.constrainHeight(helpButton.id, ConstraintSet.WRAP_CONTENT)
+        helpButton.setBackgroundResource(R.drawable.question_mark)
 
-        val st_chk1 = findViewById<CheckBox>(R.id.stretch1_cb)
-        checkboxes.add(st_chk1)
-        val st_chk2 = findViewById<CheckBox>(R.id.stretch2_cb)
-        checkboxes.add(st_chk2)
+        constraintSet.connect(helpButton.id, ConstraintSet.TOP, checkbox.id, ConstraintSet.TOP)
+        constraintSet.connect(helpButton.id, ConstraintSet.BOTTOM, checkbox.id, ConstraintSet.BOTTOM)
+        constraintSet.connect(helpButton.id, ConstraintSet.START, checkbox.id, ConstraintSet.END)
 
-        ex_chk1.isChecked = sharedPreferences.getBoolean("ex_chk1_state", false)
-        ex_chk2.isChecked = sharedPreferences.getBoolean("ex_chk2_state", false)
-        ex_chk3.isChecked = sharedPreferences.getBoolean("ex_chk3_state", false)
-        ex_chk4.isChecked = sharedPreferences.getBoolean("ex_chk4_state", false)
+        constraintSet.setMargin(helpButton.id, ConstraintSet.START, dpToPx(10f))
 
-        wm_chk1.isChecked = sharedPreferences.getBoolean("wm_chk1_state", false)
-        wm_chk2.isChecked = sharedPreferences.getBoolean("wm_chk2_state", false)
+        helpButton.setOnClickListener {
+            val intent = Intent(this, VideoActivity::class.java)
+            intent.putExtra("url", "dQw4w9WgXcQ")
+            intent.putExtra("bodypart", bdp)
+            intent.putExtra("time", time)
+            intent.putExtra("exercise", "${checkbox.text}")
+            startActivity(intent)
+        }
+        return helpButton.id
 
-        st_chk1.isChecked = sharedPreferences.getBoolean("st_chk1_state", false)
-        st_chk2.isChecked = sharedPreferences.getBoolean("st_chk2_state", false)
+    }
+
+    private fun checkboxSetup() {
+        exerciseCheckboxSetup(3)
+        val wm_chk = findViewById<CheckBox>(R.id.warmup_cb)
+        checkboxes.add(wm_chk)
+
+        val st_chk = findViewById<CheckBox>(R.id.stretch_cb)
+        checkboxes.add(st_chk)
+
+
+        wm_chk.isChecked = sharedPreferences.getBoolean("wm_chk_state", false)
+
+        st_chk.isChecked = sharedPreferences.getBoolean("st_chk_state", false)
         done_bnt.isEnabled = allDone()
 
-        ex_chk1.setOnCheckedChangeListener { _, isChecked ->
-            checkboxListenerFn(isChecked, "ex_chk1_state")
-        }
-        ex_chk2.setOnCheckedChangeListener { _, isChecked ->
-            checkboxListenerFn(isChecked, "ex_chk2_state")
-        }
-        ex_chk3.setOnCheckedChangeListener { _, isChecked ->
-            checkboxListenerFn(isChecked, "ex_chk3_state")
-        }
-        ex_chk4.setOnCheckedChangeListener { _, isChecked ->
-            checkboxListenerFn(isChecked, "ex_chk4_state")
+
+        wm_chk.setOnCheckedChangeListener { _, isChecked ->
+            checkboxListenerFn(isChecked, "wm_chk_state")
         }
 
-        wm_chk1.setOnCheckedChangeListener { _, isChecked ->
-            checkboxListenerFn(isChecked, "wm_chk1_state")
-        }
-        wm_chk2.setOnCheckedChangeListener { _, isChecked ->
-            checkboxListenerFn(isChecked, "wm_chk2_state")
-        }
-
-        st_chk1.setOnCheckedChangeListener { _, isChecked ->
-            checkboxListenerFn(isChecked, "st_chk1_state")
-        }
-        st_chk2.setOnCheckedChangeListener { _, isChecked ->
-            checkboxListenerFn(isChecked, "st_chk2_state")
+        st_chk.setOnCheckedChangeListener { _, isChecked ->
+            checkboxListenerFn(isChecked, "st_chk_state")
         }
     }
 
-    private fun resetCheckboxes(){
+    private fun helpSetup() {
+
+        val warmup_help = findViewById<ImageButton>(R.id.warmup_help_btn)
+        warmup_help.setOnClickListener {
+            val intent = Intent(this, VideoActivity::class.java)
+            intent.putExtra("url", "dQw4w9WgXcQ")
+            intent.putExtra("bodypart", bdp)
+            intent.putExtra("time", time)
+            intent.putExtra("exercise", "Bemelegítési segítség")
+            startActivity(intent)
+        }
+
+        val stretch_help = findViewById<ImageButton>(R.id.stretch_help_btn)
+        stretch_help.setOnClickListener {
+            val intent = Intent(this, VideoActivity::class.java)
+            intent.putExtra("url", "dQw4w9WgXcQ")
+            intent.putExtra("bodypart", bdp)
+            intent.putExtra("time", time)
+            intent.putExtra("exercise", "Nyújtási segítség")
+            startActivity(intent)
+        }
+    }
+
+
+    private fun dpToPx(dp: Float): Int {
+        return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, resources.displayMetrics)
+            .toInt()
+    }
+
+    private fun dpToSp(dp: Float): Float {
+        return TypedValue.applyDimension(
+            TypedValue.COMPLEX_UNIT_DIP,
+            dp,
+            resources.displayMetrics
+        ) / resources.displayMetrics.scaledDensity
+    }
+
+    private fun resetCheckboxes() {
         for (chk in checkboxes) {
             chk.isChecked = false
         }
@@ -184,7 +273,7 @@ class ExerciseActivity : ComponentActivity() {
         startActivity(intent)
     }
 
-    private fun navigateHome(){
+    private fun navigateHome() {
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
     }

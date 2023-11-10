@@ -2,13 +2,24 @@
     <string name="app_name">B_In_Shape</string>
     <string name="slogan">Let\'s B in Shape!</string>
 
-    <string name="bodypart_text">Select a bodypart</string>
-    <string name="bodypart_btn1">Lower Body</string>
-    <string name="bodypart_btn2">Upper Body</string>
-    <string name="bodypart_btn3">Cardio</string>
+    <string name="bodypart_text">Válasszon testrészt!</string>
+    <string name="bodypart_btn1">Alsó test</string>
+    <string name="bodypart_btn2">Felső test</string>
+    <string name="bodypart_btn3">Has</string>
 
-    <string name="time_text">Select training length</string>
-    <string name="time_btn1">60 minutes</string>
-    <string name="time_btn2">45 minutes</string>
-    <string name="time_btn3">30 minutes</string>
+    <string name="time_text">Válasszon időtartamot!</string>
+    <string name="time_btn1">60 perc</string>
+    <string name="time_btn2">45 perc</string>
+    <string name="time_btn3">30 perc</string>
+
+    <string name="warmup">Bemelegítés</string>
+    <string name="done">Kész</string>
+    <string name="stretch">Nyújtás</string>
+    <string name="set">Szett</string>
+
+    <string name="workout">Edzés</string>
+
+    <string name="crouch">Guggolás</string>
+    <string name="pushup">Fekvőtámasz</string>
+    <string name="run">Futás</string>
 </resources>
