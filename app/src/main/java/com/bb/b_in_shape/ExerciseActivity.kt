@@ -8,10 +8,13 @@ import android.os.Bundle
 import android.util.Log
 import android.util.TypedValue
 import android.view.Gravity
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.ImageButton
+import android.widget.PopupWindow
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.ComponentActivity
@@ -29,6 +32,8 @@ class ExerciseActivity : ComponentActivity() {
     private lateinit var done_bnt: Button
     private lateinit var bdp: String
     private lateinit var time: String
+    private lateinit var darkOverlay: View
+    private lateinit var popupWindow: PopupWindow
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,6 +41,10 @@ class ExerciseActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             setContentView(R.layout.activity_exercise)
+
+            darkOverlay = findViewById(R.id.darkOverlay)
+            showPopupWindow()
+            darkOverlay.visibility = View.VISIBLE
 
             bdp = intent.getStringExtra("bodypart").toString()
             time = intent.getStringExtra("time").toString()
@@ -62,10 +71,32 @@ class ExerciseActivity : ComponentActivity() {
 
             //Checkboxes
             checkboxSetup()
-
-
         }
 
+    }
+
+    private fun showPopupWindow() {
+        val inflater = getSystemService(LAYOUT_INFLATER_SERVICE) as LayoutInflater
+        val popupView: View = inflater.inflate(R.layout.popup_layout, null)
+
+        popupWindow = PopupWindow(
+            popupView,
+            ViewGroup.LayoutParams.WRAP_CONTENT,
+            ViewGroup.LayoutParams.WRAP_CONTENT,
+            true
+        )
+
+        popupWindow.setOnDismissListener {
+            darkOverlay.visibility = View.GONE
+        }
+
+        val parent = findViewById<ConstraintLayout>(R.id.exercise_whole)
+        popupWindow.showAtLocation(parent, Gravity.CENTER, 0, 0)
+
+        val closeButton = popupView.findViewById<Button>(R.id.closeButton)
+        closeButton.setOnClickListener {
+            popupWindow.dismiss()
+        }
     }
 
     private fun setStatus() {
