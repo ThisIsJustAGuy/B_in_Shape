@@ -77,8 +77,8 @@ class ExerciseActivity : ComponentActivity() {
     private fun exerciseCheckboxSetup(amount: Int) {
         val parentLayout = findViewById<ConstraintLayout>(R.id.exercise_group)
         var prevId = View.NO_ID
-        val constraintSet = ConstraintSet() // Create a single ConstraintSet
-        constraintSet.clone(parentLayout) // Clone the initial state
+        val constraintSet = ConstraintSet()
+        constraintSet.clone(parentLayout)
 
         for (i in 1..amount) {
             var cb = CheckBox(this)
@@ -146,19 +146,6 @@ class ExerciseActivity : ComponentActivity() {
     }
 
     private fun generateHelp(checkbox: CheckBox, constraintSet: ConstraintSet): Int {
-        /*val exercise_help = findViewById<ImageButton>(R.id.exercise_help_btn)
-exercise_help.setOnClickListener {
-    val intent = Intent(this, VideoActivity::class.java)
-    intent.putExtra("url", "dQw4w9WgXcQ")
-    intent.putExtra("bodypart", bdp)
-    intent.putExtra("time", time)
-    intent.putExtra("exercise", "Edzési segítség")
-    startActivity(intent)
-}*/
-
-        /*<ImageButton
-                app:layout_constraintStart_toEndOf="@+id/warmup_tw"
-                app:layout_constraintTop_toTopOf="parent" />*/
         val parentLayout = findViewById<ConstraintLayout>(R.id.exercise_group)
         val helpButton = ImageButton(this)
         parentLayout.addView(helpButton)
