@@ -57,7 +57,7 @@ class ExerciseActivity : ComponentActivity() {
             done_bnt = findViewById<Button>(R.id.done_btn)
             done_bnt.isEnabled = false
             done_bnt.setOnClickListener {
-                val toast = Toast.makeText(this, "Szép munka!", Toast.LENGTH_SHORT)
+                val toast = Toast.makeText(this, getString(R.string.well_done), Toast.LENGTH_SHORT)
                 toast.setGravity(Gravity.TOP or Gravity.CENTER, 0, 0)
                 toast.show()
                 resetCheckboxes()
@@ -166,11 +166,6 @@ class ExerciseActivity : ComponentActivity() {
             }
 
             generateHelp(cb, constraintSet)
-
-            Log.d(
-                "Exercise checkbox $i",
-                "Width: ${cb.width}, Height: ${cb.height}, Top: ${cb.top}, Bottom: ${cb.bottom}"
-            )
         }
 
         constraintSet.applyTo(parentLayout)
@@ -196,7 +191,7 @@ class ExerciseActivity : ComponentActivity() {
             intent.putExtra("url", "dQw4w9WgXcQ")
             intent.putExtra("bodypart", bdp)
             intent.putExtra("time", time)
-            intent.putExtra("exercise", "${checkbox.text}")
+            intent.putExtra("exercise", "${getString(R.string.general_help)} ${checkbox.text}")
             startActivity(intent)
         }
         return helpButton.id
@@ -235,7 +230,7 @@ class ExerciseActivity : ComponentActivity() {
             intent.putExtra("url", "dQw4w9WgXcQ")
             intent.putExtra("bodypart", bdp)
             intent.putExtra("time", time)
-            intent.putExtra("exercise", "Bemelegítési segítség")
+            intent.putExtra("exercise", getString(R.string.warmup_help))
             startActivity(intent)
         }
 
@@ -245,7 +240,7 @@ class ExerciseActivity : ComponentActivity() {
             intent.putExtra("url", "dQw4w9WgXcQ")
             intent.putExtra("bodypart", bdp)
             intent.putExtra("time", time)
-            intent.putExtra("exercise", "Nyújtási segítség")
+            intent.putExtra("exercise", getString(R.string.stretch_help))
             startActivity(intent)
         }
     }
