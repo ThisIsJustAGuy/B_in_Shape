@@ -103,7 +103,7 @@
         android:layout_width="136dp"
         android:layout_height="wrap_content"
         android:background="@drawable/black_nav_middle_background"
-        android:onClick="navigateToQR"
+        android:onClick="navigateToEmail"
         android:padding="5dp"
         android:src="@drawable/baseline_add_circle_outline_50"
         app:layout_constraintBottom_toBottomOf="parent"

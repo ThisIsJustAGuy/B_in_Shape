@@ -21,6 +21,11 @@ class MainActivity : ComponentActivity() {
         checkLogin()
     }
 
+    override fun onResume() {
+        super.onResume()
+        checkLogin()
+    }
+
     fun navigateToTraining(v: View) {
         val intent = Intent(this, BodypartActivity::class.java)
 
@@ -29,6 +34,17 @@ class MainActivity : ComponentActivity() {
 
     fun navigateToQR(v: View) {
         val intent = Intent(this, QR_scanner::class.java)
+
+        startActivity(intent)
+    }
+    fun navigateToLogin(v: View) {
+        val intent = Intent(this, LoginActivity::class.java)
+
+        startActivity(intent)
+    }
+
+    fun navigateToEmail(v: View) {
+        val intent = Intent(this, EmailActivity::class.java)
 
         startActivity(intent)
     }
@@ -60,12 +76,6 @@ class MainActivity : ComponentActivity() {
             exercise.layoutParams.width = dpToPx(205f)
             suggestion.visibility = View.GONE
         }
-    }
-
-    fun navigateToLogin(v: View) {
-        val intent = Intent(this, LoginActivity::class.java)
-
-        startActivity(intent)
     }
 
     fun logOut(v: View) {
