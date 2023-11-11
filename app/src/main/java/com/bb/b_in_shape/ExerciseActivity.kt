@@ -3,9 +3,7 @@ package com.bb.b_in_shape
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.SharedPreferences
-import android.graphics.Typeface
 import android.os.Bundle
-import android.util.Log
 import android.util.TypedValue
 import android.view.Gravity
 import android.view.LayoutInflater
@@ -21,7 +19,6 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
-import androidx.core.content.ContextCompat
 
 
 class ExerciseActivity : ComponentActivity() {
@@ -30,7 +27,7 @@ class ExerciseActivity : ComponentActivity() {
     private val PREFS_NAME = "MyPrefs"
     private var checkboxes: MutableList<CheckBox> = mutableListOf()
     private lateinit var done_bnt: Button
-    private lateinit var bdp: String
+    private lateinit var bodypart: String
     private lateinit var time: String
     private lateinit var darkOverlay: View
     private lateinit var popupWindow: PopupWindow
@@ -46,11 +43,8 @@ class ExerciseActivity : ComponentActivity() {
             showPopupWindow()
             darkOverlay.visibility = View.VISIBLE
 
-            bdp = intent.getStringExtra("bodypart").toString()
-            time = intent.getStringExtra("time").toString()
-
-            val back_btn = findViewById<ImageButton>(R.id.Exercise_back)
-            back_btn.setOnClickListener { _ -> navigateBack(bdp) }
+            bodypart = intent.getStringExtra("bodypart")!!
+            time = intent.getStringExtra("time")!!
 
             setStatus()
 
@@ -100,7 +94,7 @@ class ExerciseActivity : ComponentActivity() {
     }
 
     private fun setStatus() {
-        val statText = "$bdp > $time"
+        val statText = "$bodypart > $time"
         val statusText = findViewById<TextView>(R.id.Status_tw)
         statusText.text = statText
     }
@@ -189,7 +183,7 @@ class ExerciseActivity : ComponentActivity() {
         helpButton.setOnClickListener {
             val intent = Intent(this, VideoActivity::class.java)
             intent.putExtra("url", "dQw4w9WgXcQ")
-            intent.putExtra("bodypart", bdp)
+            intent.putExtra("bodypart", bodypart)
             intent.putExtra("time", time)
             intent.putExtra("exercise", "${getString(R.string.general_help)} ${checkbox.text}")
             startActivity(intent)
@@ -228,7 +222,7 @@ class ExerciseActivity : ComponentActivity() {
         warmup_help.setOnClickListener {
             val intent = Intent(this, VideoActivity::class.java)
             intent.putExtra("url", "dQw4w9WgXcQ")
-            intent.putExtra("bodypart", bdp)
+            intent.putExtra("bodypart", bodypart)
             intent.putExtra("time", time)
             intent.putExtra("exercise", getString(R.string.warmup_help))
             startActivity(intent)
@@ -238,7 +232,7 @@ class ExerciseActivity : ComponentActivity() {
         stretch_help.setOnClickListener {
             val intent = Intent(this, VideoActivity::class.java)
             intent.putExtra("url", "dQw4w9WgXcQ")
-            intent.putExtra("bodypart", bdp)
+            intent.putExtra("bodypart", bodypart)
             intent.putExtra("time", time)
             intent.putExtra("exercise", getString(R.string.stretch_help))
             startActivity(intent)
@@ -279,11 +273,8 @@ class ExerciseActivity : ComponentActivity() {
         done_bnt.isEnabled = allDone()
     }
 
-    private fun navigateBack(bdp: String) {
-        val intent = Intent(this, TimeActivity::class.java)
-        intent.putExtra("bodypart", bdp)
-
-        startActivity(intent)
+    fun navigateBack(v: View) {
+        finish()
     }
 
     private fun navigateHome() {
