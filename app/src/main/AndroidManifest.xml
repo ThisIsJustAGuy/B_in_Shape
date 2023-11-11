@@ -2,8 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <uses-permission android:name="android.permission.CAMERA"/>
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-feature android:name="android.hardware.camera" />
+
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -26,25 +28,29 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".LoginActivity"
+            android:exported="false"
+            android:theme="@style/Theme.B_In_Shape" />
+        <activity
             android:name=".TimeActivity"
             android:exported="false"
-            android:theme="@style/Theme.B_In_Shape"/>
+            android:theme="@style/Theme.B_In_Shape" />
         <activity
             android:name=".BodypartActivity"
             android:exported="false"
-            android:theme="@style/Theme.B_In_Shape"/>
+            android:theme="@style/Theme.B_In_Shape" />
         <activity
             android:name=".ExerciseActivity"
             android:exported="false"
-            android:theme="@style/Theme.B_In_Shape"/>
+            android:theme="@style/Theme.B_In_Shape" />
         <activity
             android:name=".QR_scanner"
             android:exported="false"
-            android:theme="@style/Theme.B_In_Shape"/>
+            android:theme="@style/Theme.B_In_Shape" />
         <activity
             android:name=".VideoActivity"
             android:exported="false"
-            android:theme="@style/Theme.B_In_Shape"/>
+            android:theme="@style/Theme.B_In_Shape" />
     </application>
 
 </manifest>

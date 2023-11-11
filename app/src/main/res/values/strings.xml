@@ -1,6 +1,13 @@
 <resources>
     <string name="app_name">B_In_Shape</string>
     <string name="slogan">Let\'s B in Shape!</string>
+    <string name="login_question"><u>Van fiókja?</u></string>
+    <string name="logout"><u>Kijelentkezés</u></string>
+
+    <string name="username">Felhasználónév</string>
+    <string name="password">Jelszó</string>
+    <string name="login_btn">Bejelentkezés</string>
+    <string name="invalid_login">Sikertelen bejelentkezés</string>
 
     <string name="bodypart_text">Válasszon testrészt!</string>
     <string name="bodypart_btn1">Alsó test</string>
@@ -13,15 +20,18 @@
     <string name="time_btn3">30 perc</string>
 
     <string name="warmup">Bemelegítés</string>
-    <string name="done">Kész</string>
-    <string name="stretch">Nyújtás</string>
-    <string name="set">Szett</string>
-
     <string name="workout">Edzés</string>
+    <string name="stretch">Nyújtás</string>
+    <string name="warmup_help">Bemelegítési segítség</string>
+    <string name="stretch_help">Nyújtási segítség</string>
+    <string name="general_help">Segítség:</string>
+    <string name="done">Kész</string>
+
 
     <string name="crouch">Guggolás</string>
     <string name="pushup">Fekvőtámasz</string>
     <string name="run">Futás</string>
+    <string name="well_done">Szép munka!</string>
 
     <string name="pain">A gyakorlatokat csak addig folytassa, míg azok kényelmesen végezhetőek! Ha fájdalmat érez azonnal hagyja abba az edzést! </string>
     <string name="responsibility">Ezen irányelv be nem tartása után keletkező esetleges károkért nem vállalunk felelősséget!</string>
