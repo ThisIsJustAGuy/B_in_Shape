@@ -50,7 +50,8 @@ class MainActivity : ComponentActivity() {
     }
 
     private fun checkLogin() {
-        val isLoggedIn = sharedPreferences.getBoolean("isLoggedIn", false)
+        val username = sharedPreferences.getString("username", null)
+        val isLoggedIn = username != null
         val login = findViewById<TextView>(R.id.login_tw)
         val logout = findViewById<TextView>(R.id.logout_tw)
         if (isLoggedIn) {
@@ -80,7 +81,7 @@ class MainActivity : ComponentActivity() {
 
     fun logOut(v: View) {
         val editor = sharedPreferences.edit()
-        editor.putBoolean("isLoggedIn", false)
+        editor.remove("username")
         editor.apply()
         checkLogin()
     }

@@ -12,6 +12,7 @@
     <string name="email_message">Kérés szövege</string>
     <string name="send_email">Kérés küldése</string>
     <string name="new_request">Új gép, vagy gyakorlat felvételének kérelme</string>
+    <string name="dont_edit">Az e-mail tárgyát ne szerkessze!</string>
 
     <string name="bodypart_text">Válasszon testrészt!</string>
     <string name="bodypart_btn1">Alsó test</string>

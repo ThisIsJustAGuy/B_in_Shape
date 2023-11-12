@@ -37,7 +37,7 @@ class LoginActivity : ComponentActivity() {
 
         if (isValidCredentials(username, password)) {
             val editor = sharedPreferences.edit()
-            editor.putBoolean("isLoggedIn", true)
+            editor.putString("username", username)
             editor.apply()
             finish()
         } else {
