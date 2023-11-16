@@ -99,7 +99,7 @@ class ExerciseActivity : ComponentActivity() {
         statusText.text = statText
     }
 
-    private fun exerciseCheckboxSetup(amount: Int) {
+    private fun exerciseCheckboxSetup(amount: Int, exercises: List<String>) {
         val parentLayout = findViewById<ConstraintLayout>(R.id.exercise_group)
         var prevId = View.NO_ID
         val constraintSet = ConstraintSet()
@@ -108,7 +108,7 @@ class ExerciseActivity : ComponentActivity() {
         for (i in 1..amount) {
             var cb = CheckBox(this)
             parentLayout.addView(cb)
-            val exerciseName = "run"
+            val exerciseName = exercises[i-1]
             val exercise = resources.getString(resources.getIdentifier(exerciseName, "string", applicationContext.packageName))
             cb.id = View.generateViewId()
             cb.text = "$exercise"
@@ -193,7 +193,7 @@ class ExerciseActivity : ComponentActivity() {
     }
 
     private fun checkboxSetup() {
-        exerciseCheckboxSetup(3)
+        exerciseCheckboxSetup(4, listOf("squat","lunge","innerthigh","legpcurl"))
         val wm_chk = findViewById<CheckBox>(R.id.warmup_cb)
         checkboxes.add(wm_chk)
 
@@ -221,7 +221,7 @@ class ExerciseActivity : ComponentActivity() {
         val warmup_help = findViewById<ImageButton>(R.id.warmup_help_btn)
         warmup_help.setOnClickListener {
             val intent = Intent(this, VideoActivity::class.java)
-            intent.putExtra("url", "dQw4w9WgXcQ")
+            intent.putExtra("url", "-PlfOH9Xbuc")
             intent.putExtra("bodypart", bodypart)
             intent.putExtra("time", time)
             intent.putExtra("exercise", getString(R.string.warmup_help))
@@ -231,7 +231,7 @@ class ExerciseActivity : ComponentActivity() {
         val stretch_help = findViewById<ImageButton>(R.id.stretch_help_btn)
         stretch_help.setOnClickListener {
             val intent = Intent(this, VideoActivity::class.java)
-            intent.putExtra("url", "dQw4w9WgXcQ")
+            intent.putExtra("url", "-PlfOH9Xbuc")
             intent.putExtra("bodypart", bodypart)
             intent.putExtra("time", time)
             intent.putExtra("exercise", getString(R.string.stretch_help))
