@@ -14,6 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
+        android:onClick="navigateBack"
         android:background="@android:color/transparent"
         android:src="@drawable/arrow_back_50"
         app:layout_constraintStart_toStartOf="parent"
@@ -41,7 +42,7 @@
         android:textAlignment="center"
         android:textAppearance="@android:style/TextAppearance.Material.Display1"
         android:textColor="@color/white"
-        android:textFontWeight="800"
+        android:textStyle="bold"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
@@ -50,6 +51,7 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="30dp"
         android:layout_marginTop="80dp"
+        android:onClick="navigateForward"
         android:background="@drawable/yellow_btn_background"
         android:text="@string/time_btn1"
         android:textAllCaps="false"
@@ -64,6 +66,7 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="30dp"
         android:layout_marginTop="25dp"
+        android:onClick="navigateForward"
         android:background="@drawable/yellow_btn_background"
         android:text="@string/time_btn2"
         android:textAllCaps="false"
@@ -78,6 +81,7 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="30dp"
         android:layout_marginTop="25dp"
+        android:onClick="navigateForward"
         android:background="@drawable/yellow_btn_background"
         android:text="@string/time_btn3"
         android:textAllCaps="false"
