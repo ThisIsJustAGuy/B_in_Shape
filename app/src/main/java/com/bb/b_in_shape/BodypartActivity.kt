@@ -19,6 +19,7 @@ class BodypartActivity : ComponentActivity() {
         val intent = Intent(this, TimeActivity::class.java)
         if (v is Button) {
             intent.putExtra("bodypart", v.text.toString())
+            intent.putExtra("bodypart_id", v.contentDescription)
         }
 
         startActivity(intent)

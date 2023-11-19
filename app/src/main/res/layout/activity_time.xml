@@ -46,7 +46,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/Time_btn1"
+        android:id="@+id/Time_btn3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="30dp"
@@ -58,7 +58,8 @@
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Time_tw" />
+        app:layout_constraintTop_toBottomOf="@+id/Time_tw"
+        android:contentDescription="3"/>
 
     <Button
         android:id="@+id/Time_btn2"
@@ -73,10 +74,11 @@
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Time_btn1" />
+        app:layout_constraintTop_toBottomOf="@+id/Time_btn3"
+        android:contentDescription="2"/>
 
     <Button
-        android:id="@+id/Time_btn3"
+        android:id="@+id/Time_btn1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="30dp"
@@ -88,6 +90,7 @@
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Time_btn2" />
+        app:layout_constraintTop_toBottomOf="@+id/Time_btn2"
+        android:contentDescription="1"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

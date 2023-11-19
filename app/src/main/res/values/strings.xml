@@ -31,20 +31,9 @@
     <string name="stretch_help">Nyújtási segítség</string>
     <string name="general_help">Segítség:</string>
     <string name="done">Kész</string>
-
-
-    <string name="squat">Guggolás kettlebellel</string>
-    <string name="lunge">Kitörés hátra</string>
-    <string name="innerthigh">Combközelítő gép</string>
-    <string name="legpcurl">Ülő combhajlító gép</string>
-    <string name="pushup">Fekvőtámasz</string>
-    <string name="run">Futás</string>
     <string name="well_done">Szép munka!</string>
 
-    <string name="hsquat">jPne7KxVNqo</string>
-    <string name="hlunge">60qcUAJaWBA</string>
-    <string name="hinnerthigh">N7L-A7K_M1o</string>
-    <string name="hlegpcurl">dEqXQRV0zSw</string>
+    <string name="warmupstretch">A bemelegítő nyújtás nagyon fontos minden edzés előtt a sérülések elkerülése végett, így ezt soha ne hagyd ki és legalább 5 percet szánj rá! Az edzés előtt mindig dinamikus nyújtást végezz!</string>
 
     <string name="pain">A gyakorlatokat csak addig folytassa, míg azok kényelmesen végezhetőek! Ha fájdalmat érez azonnal hagyja abba az edzést! </string>
     <string name="responsibility">Ezen irányelv be nem tartása után keletkező esetleges károkért nem vállalunk felelősséget!</string>

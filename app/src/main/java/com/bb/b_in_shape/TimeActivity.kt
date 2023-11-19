@@ -9,11 +9,13 @@ import androidx.activity.ComponentActivity
 
 class TimeActivity : ComponentActivity() {
     lateinit var bodypart: String
+    lateinit var bodypartid: String
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_time)
 
         bodypart = intent.getStringExtra("bodypart")!!
+        bodypartid = intent.getStringExtra("bodypart_id")!!
 
         var statusText = findViewById<TextView>(R.id.Status_tw)
         statusText.text = bodypart
@@ -28,6 +30,8 @@ class TimeActivity : ComponentActivity() {
         if (v is Button) {
             intent.putExtra("time", v.text)
             intent.putExtra("bodypart", bodypart)
+            intent.putExtra("bodypart_id", bodypartid)
+            intent.putExtra("time_id", v.contentDescription)
         }
         startActivity(intent)
     }

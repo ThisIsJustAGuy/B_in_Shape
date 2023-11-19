@@ -45,7 +45,8 @@
         app:layout_constraintTop_toBottomOf="@+id/Bodypart_tw"
         android:background="@drawable/yellow_btn_background"
         android:layout_marginHorizontal="30dp"
-        android:layout_marginTop="80dp" />
+        android:layout_marginTop="80dp"
+        android:contentDescription="1"/>
 
     <Button
         android:id="@+id/Bodypart_btn2"
@@ -60,7 +61,8 @@
         app:layout_constraintTop_toBottomOf="@+id/Bodypart_btn1"
         android:background="@drawable/yellow_btn_background"
         android:layout_marginHorizontal="30dp"
-        android:layout_marginTop="25dp"/>
+        android:layout_marginTop="25dp"
+        android:contentDescription="2"/>
 
     <Button
         android:id="@+id/Bodypart_btn3"
@@ -75,7 +77,8 @@
         app:layout_constraintTop_toBottomOf="@+id/Bodypart_btn2"
         android:background="@drawable/yellow_btn_background"
         android:layout_marginHorizontal="30dp"
-        android:layout_marginTop="25dp"/>
+        android:layout_marginTop="25dp"
+        android:contentDescription="3"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

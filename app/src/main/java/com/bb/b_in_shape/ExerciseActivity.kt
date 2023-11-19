@@ -19,6 +19,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
+import com.bb.b_in_shape.DATA.dataMatrix
 
 
 class ExerciseActivity : ComponentActivity() {
@@ -31,6 +32,8 @@ class ExerciseActivity : ComponentActivity() {
     private lateinit var time: String
     private lateinit var darkOverlay: View
     private lateinit var popupWindow: PopupWindow
+    private lateinit var bodypartid: String
+    private lateinit var timeid: String
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,6 +48,9 @@ class ExerciseActivity : ComponentActivity() {
 
             bodypart = intent.getStringExtra("bodypart")!!
             time = intent.getStringExtra("time")!!
+            bodypartid = intent.getStringExtra("bodypart_id")!!
+            timeid = intent.getStringExtra("time_id")!!
+
 
             setStatus()
 
@@ -99,17 +105,17 @@ class ExerciseActivity : ComponentActivity() {
         statusText.text = statText
     }
 
-    private fun exerciseCheckboxSetup(amount: Int, exercises: List<String>) {
+    private fun exerciseCheckboxSetup(amount: Int, exercises: Array<String>) {
         val parentLayout = findViewById<ConstraintLayout>(R.id.exercise_group)
         var prevId = View.NO_ID
         val constraintSet = ConstraintSet()
         constraintSet.clone(parentLayout)
 
+
         for (i in 1..amount) {
             var cb = CheckBox(this)
             parentLayout.addView(cb)
-            val exerciseName = exercises[i-1]
-            val exercise = resources.getString(resources.getIdentifier(exerciseName, "string", applicationContext.packageName))
+            val exercise = exercises[i-1]
             cb.id = View.generateViewId()
             cb.text = "$exercise"
 
@@ -159,13 +165,13 @@ class ExerciseActivity : ComponentActivity() {
                 checkboxListenerFn(isChecked, "ex_cb_$i-state")
             }
 
-            generateHelp(cb, constraintSet)
+            generateHelp(cb, constraintSet, generateClickListeners(dataMatrix[0]), i-1)
         }
 
         constraintSet.applyTo(parentLayout)
     }
 
-    private fun generateHelp(checkbox: CheckBox, constraintSet: ConstraintSet): Int {
+    private fun generateHelp(checkbox: CheckBox, constraintSet: ConstraintSet,buttonClickListeners: List<View.OnClickListener>,currentIndex: Int): Int {
         val parentLayout = findViewById<ConstraintLayout>(R.id.exercise_group)
         val helpButton = ImageButton(this)
         parentLayout.addView(helpButton)
@@ -180,20 +186,32 @@ class ExerciseActivity : ComponentActivity() {
 
         constraintSet.setMargin(helpButton.id, ConstraintSet.START, dpToPx(10f))
 
-        helpButton.setOnClickListener {
-            val intent = Intent(this, VideoActivity::class.java)
-            intent.putExtra("url", "dQw4w9WgXcQ")
-            intent.putExtra("bodypart", bodypart)
-            intent.putExtra("time", time)
-            intent.putExtra("exercise", "${getString(R.string.general_help)} ${checkbox.text}")
-            startActivity(intent)
-        }
+        helpButton.setOnClickListener(buttonClickListeners[currentIndex])
+
         return helpButton.id
 
     }
 
-    private fun checkboxSetup() {
-        exerciseCheckboxSetup(4, listOf("squat","lunge","innerthigh","legpcurl"))
+    private fun generateClickListeners (workoutplan: Array<String>): List<View.OnClickListener>{
+        var buttonClickListeners: MutableList<View.OnClickListener> = mutableListOf()
+        for (i in 1..workoutplan.size){
+            val exercise = workoutplan[i-1]
+            val buttonClickListener = View.OnClickListener {
+                val intent = Intent(this, VideoActivity::class.java)
+                intent.putExtra("url", workoutplan[i+3])
+                intent.putExtra("bodypart", bodypart)
+                intent.putExtra("time", time)
+                intent.putExtra("exercise", exercise)
+                intent.putExtra("description", workoutplan[i+7])
+                startActivity(intent)
+            }
+            buttonClickListeners.add(buttonClickListener)
+        }
+        return buttonClickListeners
+    }
+
+    fun checkboxSetup() {
+        exerciseCheckboxSetup(timeid.toInt()+1, dataMatrix[bodypartid.toInt()-1])
         val wm_chk = findViewById<CheckBox>(R.id.warmup_cb)
         checkboxes.add(wm_chk)
 
@@ -225,6 +243,7 @@ class ExerciseActivity : ComponentActivity() {
             intent.putExtra("bodypart", bodypart)
             intent.putExtra("time", time)
             intent.putExtra("exercise", getString(R.string.warmup_help))
+            intent.putExtra("description", getString(R.string.warmupstretch))
             startActivity(intent)
         }
 
@@ -235,6 +254,7 @@ class ExerciseActivity : ComponentActivity() {
             intent.putExtra("bodypart", bodypart)
             intent.putExtra("time", time)
             intent.putExtra("exercise", getString(R.string.stretch_help))
+            intent.putExtra("description", getString(R.string.warmupstretch))
             startActivity(intent)
         }
     }
