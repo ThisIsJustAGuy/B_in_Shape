@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import android.util.TypedValue
 import android.view.Gravity
 import android.view.LayoutInflater
@@ -71,6 +72,8 @@ class ExerciseActivity : ComponentActivity() {
 
             //Checkboxes
             checkboxSetup()
+
+            checkEnabled()
         }
 
     }
@@ -118,6 +121,7 @@ class ExerciseActivity : ComponentActivity() {
             val exercise = exercises[i-1]
             cb.id = View.generateViewId()
             cb.text = "$exercise"
+            cb.isEnabled = false
 
 
             constraintSet.connect(
@@ -211,9 +215,10 @@ class ExerciseActivity : ComponentActivity() {
     }
 
     fun checkboxSetup() {
-        exerciseCheckboxSetup(timeid.toInt()+1, dataMatrix[bodypartid.toInt()-1])
         val wm_chk = findViewById<CheckBox>(R.id.warmup_cb)
         checkboxes.add(wm_chk)
+
+        exerciseCheckboxSetup(timeid.toInt()+1, dataMatrix[bodypartid.toInt()-1])
 
         val st_chk = findViewById<CheckBox>(R.id.stretch_cb)
         checkboxes.add(st_chk)
@@ -222,6 +227,7 @@ class ExerciseActivity : ComponentActivity() {
         wm_chk.isChecked = sharedPreferences.getBoolean("wm_chk_state", false)
 
         st_chk.isChecked = sharedPreferences.getBoolean("st_chk_state", false)
+        st_chk.isEnabled = false
         done_bnt.isEnabled = allDone()
 
 
@@ -286,11 +292,30 @@ class ExerciseActivity : ComponentActivity() {
         return true
     }
 
+    private fun checkEnabled() {
+        var exercise_done= true
+        for (i in 0 until checkboxes.count()-1) {
+            if(i == 0){
+                for (j in 1 until checkboxes.count()-1) {
+                    checkboxes[j].isEnabled = checkboxes[i].isChecked
+                    if (!checkboxes[i].isChecked)
+                        checkboxes[j].isChecked = false
+                }
+            }
+            else if(i < checkboxes.count()-1 && !checkboxes[i].isChecked) {
+                exercise_done = false
+                checkboxes[checkboxes.count()-1].isChecked = false
+            }
+        }
+        checkboxes[checkboxes.count()-1].isEnabled = exercise_done
+    }
+
     private fun checkboxListenerFn(isChecked: Boolean, stateString: String) {
         val editor = sharedPreferences.edit()
         editor.putBoolean(stateString, isChecked)
         editor.apply()
         done_bnt.isEnabled = allDone()
+        checkEnabled()
     }
 
     fun navigateBack(v: View) {
