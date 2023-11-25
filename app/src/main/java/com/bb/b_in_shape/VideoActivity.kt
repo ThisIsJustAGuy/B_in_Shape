@@ -55,11 +55,12 @@ class VideoActivity: ComponentActivity() {
     }
 
     fun navigateBack(bdp: String, time: String) {
-        val intent = Intent(this, ExerciseActivity::class.java)
-        intent.putExtra("bodypart", bdp)
-        intent.putExtra("time", time)
+        //val intent = Intent(this, ExerciseActivity::class.java)
+        //intent.putExtra("bodypart", bdp)
+        //intent.putExtra("time", time)
 
-        startActivity(intent)
+        //startActivity(intent)
+        finish()
     }
     fun stringMaker (url: String): String{
         val ert: String="<html><body><!-- 1. The <iframe> (and video player) will replace this <div> tag. -->\n" +
